@@ -124,6 +124,14 @@ impl Certificate {
 }
 
 impl Identity {
+    /// TODO
+    #[cfg(feature = "native-tls")]
+    pub fn from_native_tls(identity: native_tls_crate::Identity) -> crate::Result<Identity> {
+        Ok(Identity {
+            inner: ClientCert::Pkcs12(identity),
+        })
+    }
+
     /// Parses a DER-formatted PKCS #12 archive, using the specified password to decrypt the key.
     ///
     /// The archive should contain a leaf certificate and its private key, as well any intermediate
